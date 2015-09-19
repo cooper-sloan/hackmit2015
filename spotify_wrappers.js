@@ -1,9 +1,7 @@
+
 var _ = require('underscore');
 var Parse = require('./parse_init').createParse();
 var SpotifyWebApi = require('spotify-web-api-node');
-
-// credentials are optional
-var spotifyApi = new SpotifyWebApi();
 
 // Search tracks whose name, album or artist contains 'Love'
 function getTracks(title){
@@ -31,9 +29,3 @@ function getTracks(title){
 function getPlayer(sondId){
 	return "<iframe src=\"https://embed.spotify.com/?uri="+songId+"\" width=\"300\" height=\"380\" frameborder=\"0\" allowtransparency=\"true\"></iframe>"
 }
-
-getTracks("Hello there").then(function(results){
-	console.log(results)
-},function(err){
-	console.log(err)
-})
