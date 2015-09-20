@@ -49,7 +49,6 @@ exports.getSongInfo = function(songId){
 		var trackObject={artists:[]}
 		_.each(track.artists,function(artist){
 			trackObject.artists.push(artist.name)
-			artistid='2RdwBSPQiwcmiDo9kixcl8'
 		})
 		trackObject.spotifyId= track.id
 		trackObject.title = track.name

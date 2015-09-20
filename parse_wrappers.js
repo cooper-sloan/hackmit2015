@@ -54,7 +54,7 @@ exports.saveFriendship = function (userId1,userId2){
 */
 exports.saveLike =function (userId,songId,like){
 	var promise= new Parse.Promise()
-	var query = new Parse.Query("_User")
+	var query = new Parse.Query(Parse.User)
 	query.get(userId).then(function(user){
 		var likeObject= new Parse.Object("Likes")
 		likeObject.set("userId",userId)
@@ -106,21 +106,31 @@ exports.saveShare =function(senderId, recieverId, songId){
 //Returns a list of songId for the user
 exports.getShares = function(userId){
 	var promise = new Parse.Promise()
-	var ids=[]
+	var promises= []
+	var shares=[]
 	var shareQuery = new Parse.Query("Shares")
 	var likeQuery = new Parse.Query("Likes")
 	likeQuery.equalTo("userId",userId)
 	shareQuery.equalTo("recieverId",userId)
 	shareQuery.doesNotMatchKeyInQuery("songId","songId",likeQuery)
 	shareQuery.each(function(element){
+		var innerPromise= new Parse.Promise()
+		promises.push(innerPromise)
 		var songId=element.attributes.songId
-		//SpotifyWrappers.getSongInfo(songId).then(function(results))
-
+		SpotifyWrappers.getSongInfo(songId).then(function(results){
+			shares.push(results)
+			innerPromise.resolve()
+		})
 	}).then(function(results){
-		promise.resolve(ids)
+		Parse.Promise.when(promises).then(function(){
+			promise.resolve(shares)
+		},function(err){
+			promise.reject(err)
+		})
 	},function(err){
 		promise.reject(err)
 	})
+	Parse.Promise.when(promises)
 	return promise
 }
 
@@ -293,10 +303,10 @@ exports.getFriendsLikes = function(userId){
 //exports.getFriends('qs2dsZJNPJ').then(function(r){console.log(r)},function(err){console.log(err)})
 //exports.getGenres().then(function(r){console.log(r)},function(err){console.log(err)})
 //exports.createUser('rockandroll','password','rocker@mail.com')
-//exports.getShares('qs2dsZJNPJ').then(function(r){console.log(r)},function(err){console.log(err)})
+exports.getShares('qs2dsZJNPJ').then(function(r){console.log(r)},function(err){console.log(err)})
 //exports.getSongs('rap').then(function(r){console.log(r)},function(err){console.log(err)})
 //exports.saveShare('94g6NNsxZM','qs2dsZJNPJ','swag').then(function(r){console.log(r)},function(err){console.log(err)})
-exports.saveLike('Fb91E6KV3G','qs2dsZJNPJ',true).then(function(r){console.log(r)},function(err){console.log(err)})
+//exports.saveLike('Fb91E6KV3G','qs2dsZJNPJ',true).then(function(r){console.log(r)},function(err){console.log(err)})
 
 /*
 num=0
