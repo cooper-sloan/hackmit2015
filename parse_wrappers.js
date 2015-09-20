@@ -50,7 +50,7 @@ exports.saveFriendship = function (userId1,userId2){
 }
 
 /**
-* Returns a Parse.Promise to save a users like
+* like is a boolean value, true or false
 */
 exports.saveLike =function (userId,songId,like){
 	var promise= new Parse.Promise()
@@ -192,6 +192,26 @@ exports.getSongs = function(genre){
 	return promise
 }
 
+exports.getLikes = function(userId){
+	var promise = new Parse.Promise()
+	var query = new Parse.Query("Likes")
+	query.include("user")
+	query.equalTo("userId",userId)
+	query.equalTo("like",true)
+	var likes=[]
+	query.each(function(like){
+		var likeObject= {}
+		likeObject.username = like.get("user").get("username")
+		likeObject.songId= like.get("songId")
+		likes.push(likeObject)
+	}).then(function(){
+		promise.resolve(likes)
+	},function(err){
+		promise.reject(err)
+	})
+	return promise
+}
+
 exports.getGenres = function(){
 	var promise = new Parse.Promise()
 	var genres = []
@@ -210,6 +230,40 @@ exports.getGenres = function(){
 	return promise
 }
 
+exports.getFriendsLikes = function(userId){
+	var promise = new Parse.Promise()
+	var promiseHolder= new Parse.Promise()
+	var promises = [promiseHolder]
+	var friendsLikes = []
+	var friends = []
+	exports.getFriends(userId).then(function(results){
+		friends = results
+		console.log(friends)
+		_.each(friends,function(friend){
+			var newPromise = new Parse.Promise()
+			promises.push(newPromise)
+			exports.getLikes(friend.id).then(function(results){
+				console.log(promises)
+				//console.log(results)
+				friendsLikes.push(results)
+				promise.resolve(friendsLikesf)
+			},function(err){
+				//console.log(err)
+				promise.reject(err)
+			})
+		})
+		promiseHolder.resolve()
+	},function(err){
+		promise.reject(err)
+	})
+	return promise
+}
+
+
+//exports.getFriends('94g6NNsxZM').then(function(r){console.log(r)},function(err){console.log(err)})
+//exports.getLikes('qs2dsZJNPJ').then(function(r){console.log(r.length)},function(err){console.log(err)})
+
+exports.getFriendsLikes('94g6NNsxZM').then(function(r){console.log(r)},function(err){console.log(err)})
 //exports.getFriends('qs2dsZJNPJ').then(function(r){console.log(r)},function(err){console.log(err)})
 //exports.getGenres().then(function(r){console.log(r)},function(err){console.log(err)})
 //exports.createUser('rockandroll','password','rocker@mail.com')
