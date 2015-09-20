@@ -303,7 +303,7 @@ exports.getFriendsLikes = function(userId){
 //exports.getFriends('qs2dsZJNPJ').then(function(r){console.log(r)},function(err){console.log(err)})
 //exports.getGenres().then(function(r){console.log(r)},function(err){console.log(err)})
 //exports.createUser('rockandroll','password','rocker@mail.com')
-exports.getShares('qs2dsZJNPJ').then(function(r){console.log(r)},function(err){console.log(err)})
+//exports.getShares('qs2dsZJNPJ').then(function(r){console.log(r)},function(err){console.log(err)})
 //exports.getSongs('rap').then(function(r){console.log(r)},function(err){console.log(err)})
 //exports.saveShare('94g6NNsxZM','qs2dsZJNPJ','swag').then(function(r){console.log(r)},function(err){console.log(err)})
 //exports.saveLike('Fb91E6KV3G','qs2dsZJNPJ',true).then(function(r){console.log(r)},function(err){console.log(err)})
