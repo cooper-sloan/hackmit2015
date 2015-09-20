@@ -23,7 +23,7 @@ exports.getTracks = function(title){
 			trackObject.previewUrl=track.preview_url
 			trackList.push(trackObject)
 			//REMOVE
-			trackObject.genre=title
+			//trackObject.genre=title
 		})
 		promise.resolve(trackList)
 	  }, function(err) {
@@ -50,7 +50,6 @@ exports.getSongInfo = function(songId){
 		_.each(track.artists,function(artist){
 			trackObject.artists.push(artist.name)
 			artistid='2RdwBSPQiwcmiDo9kixcl8'
-
 		})
 		trackObject.spotifyId= track.id
 		trackObject.title = track.name

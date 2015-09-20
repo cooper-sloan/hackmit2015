@@ -184,6 +184,26 @@ exports.getSongs = function(genre){
 	return promise
 }
 
+exports.getGenres = function(){
+	var promise = new Parse.Promise()
+	var genres = []
+	var query = new Parse.Query('Songs')
+	query.select("genre")
+	query.each(function(song){
+		genre=song.attributes.genre
+		if(!_.contains(genres,genre)){
+			genres.push(song.attributes.genre)
+		}
+	}).then(function(){
+		promise.resolve(genres)
+	},function(err){
+		promise.reject(err)
+	})
+	return promise
+}
+
+
+exports.getGenres().then(function(r){console.log(r)},function(err){console.log(err)})
 //exports.createUser('rockandroll','password','rocker@mail.com')
 //exports.getShares('qs2dsZJNPJ').then(function(r){console.log(r)},function(err){console.log(err)})
 //exports.getSongs('rap').then(function(r){console.log(r)},function(err){console.log(err)})
