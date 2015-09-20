@@ -19,7 +19,16 @@
 					</div>
 					<div class = "col-md-2">
 						<div class = "notification">
-	  							<span class="glyphicon glyphicon-bullhorn purple" aria-hidden="true"></span>							
+	  							<span class="glyphicon glyphicon-bullhorn purple" aria-hidden="true"></span>						
+	  							<div dropdown >
+					      		<button id="single-button" type="button" class="btn btn-default" dropdown-toggle ng-disabled="disabled"> {{notifications.length}} notifications
+					      		</button>
+					      		<ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
+					        		<button ng-repeat="notif in notifications" ng-click="updateSong(notif)">
+					        			{{notif}}
+					        		</button>
+					      		</ul>
+					    	</div>	
 						</div>
 					</div>
 					<div class = "col-md-2">
@@ -86,28 +95,33 @@
 					<div class = "current_song">
 						<div class = "api">
 							<h4> Current Song </h4>
-							<iframe src="https://embed.spotify.com/?uri=spotify:track:4th1RQAelzqgY7wL53UGQt" width="250" height="330" frameborder="0" allowtransparency="true"></iframe>
+							<iframe  id="iframeSong" src="{{currentSongUrl}}" width="250" height="330" frameborder="0" allowtransparency="true"></iframe>
 						</div>
 						<div class = "likes">
 							<table class = "thumbs_table">
 								<tr>
 									<td>
-										<button type="button" class = "btn btn-default">
+										<button type="button" class = "btn btn-default" ng-click= "addLike()">
 		  									<span class="glyphicon glyphicon-thumbs-up green" aria-hidden="true"></span> 
 										</button>
 									</td>
 									<td>
-										<button type="button" class = "btn btn-default">
+										<button type="button" class = "btn btn-default" ng-click="addDislike()">
 		  									<span class="glyphicon glyphicon-thumbs-down red" aria-hidden="true"></span> 
 										</button>
 									</td>
 								</tr>
 							</table>
+							<div dropdown >
+					      		<button id="single-button" type="button" class="btn btn-default" dropdown-toggle ng-disabled="disabled"><span class="glyphicon glyphicon-chevron-down purple" aria-hidden="true"></span> Share 
+					      		</button>
+					      		<ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
+					        		<button ng-repeat="user in userFriends" ng-click="shareSong(user.id)">
+					        			{{user.username}}
+					        		</button>
+					      		</ul>
+					    	</div>
 							
-							<button type="button" class = "btn btn-default">
-	  							<span class="glyphicon glyphicon-chevron-down purple" aria-hidden="true"></span> Share
-	  							
-							</button>
 							<button type="button" class = "btn btn-default">
 	  							<span class="glyphicon glyphicon-time purple" aria-hidden="true"></span> Save for later
 	  							

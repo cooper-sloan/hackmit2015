@@ -62,6 +62,43 @@
         
         //res.send([{title: "Hotline Bling", artist:"Drake", songID:"6nmz4imkDcmtwMjocAzFSx", genre: category}])
     })
+
+    app.post('/addLike', function(req,res){
+        console.log('endpoint called')
+        var userId= req.body.userId;
+        var songId= req.body.songId;
+        parseDB.saveLike(userId,songId,true);
+        res.send('liked')
+    })
+    app.post('/addDislike', function(req,res){
+        var userId= req.body.userId;
+        var songId= req.body.songId;
+        parseDB.saveLike(userId,songId,false);
+        res.send("disliked")
+    })
+
+    app.post('/getFriends',function(req,res){
+        var userId= req.body.userId;
+        parseDB.getFriends(userId).then(function(result){
+            res.send(result);
+        })
+    })
+
+    app.post('/shareSong', function(req,res){
+        var sender= req.body.sender;
+        var recipient= req.body.recipient;
+        var songId= req.body.songId;
+        parseDB.saveShare(sender,recipient,songId)
+        console.log("shared song");
+        res.send("shared song");
+        
+    })
+    app.post('/getNotifications',function(req,res){
+        var userId= req.body.userId;
+        parseDB.getShares(userId).then(function(result){
+            res.send(result)
+        })
+    })
     // listen (start app with node server.js) ======================================
     app.listen(port);
     console.log("App listening on port 8080");
