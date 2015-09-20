@@ -56,10 +56,19 @@
     });
     app.post('/updateFeed',function(req,res){
         var category= req.body.genre;
-        var songList= parseDB.getSongs(category).then(function(result){
+        var userId= req.body.userId;
+        var tabState= req.body.tabState;
+        if (tabState== "globalFeed"){
+            var songList= parseDB.getSongsForUser(category,userId).then(function(result){
             res.send(result)
-        })
+            })
+        }
         
+        else if (tabState== "friendsFeed"){
+            parseDB.getFriendsLikes(userId).then(function(result){
+                res.send(result);
+            })
+        }
         //res.send([{title: "Hotline Bling", artist:"Drake", songID:"6nmz4imkDcmtwMjocAzFSx", genre: category}])
     })
 
@@ -89,13 +98,21 @@
         var recipient= req.body.recipient;
         var songId= req.body.songId;
         parseDB.saveShare(sender,recipient,songId)
-        console.log("shared song");
+       
         res.send("shared song");
         
     })
     app.post('/getNotifications',function(req,res){
         var userId= req.body.userId;
         parseDB.getShares(userId).then(function(result){
+            res.send(result)
+        })
+    })
+
+    app.post('/getTrackInfo', function(req,res){
+        var trackIds= req.body.trackIds;
+        spotifyApi.getTracks(trackIds).then(function(result){
+           
             res.send(result)
         })
     })

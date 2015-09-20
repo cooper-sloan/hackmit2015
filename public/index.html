@@ -28,8 +28,8 @@
 						      			</span>
 						      		</button>
 						      		<ul class="dropdown-menu" role="menu" aria-labelledby="single-button2">
-						        		<button ng-repeat="notif in notifications" ng-click="updateSong(notif)">
-						        			{{notif}}
+						        		<button ng-repeat="notif in notifications" ng-click="updateSong(notif.id)">
+						        			{{notif.name}}
 						        		</button>
 						      		</ul>
 						    		</div>	
@@ -81,14 +81,19 @@
 				<div class = "col-md-7">
 					<div class = "feed">
 							<tabset justified = "true">
-								<tab heading="Global Feed" style = "color: red" class = "global">
-									<ul style="list-style: none">
-							    		<li ng-repeat="song in feedSongs | limitTo: 15" ng-if="feedSongs.length>0">
+								<tab heading="Global Feed" style = "color: red" ng-click="currentTab= 'globalFeed'; updateFeed(selectedCategory)">
+									<ul style="list-style: none" class="no-overflow">
+							    		<li ng-repeat="song in feedSongs | limitTo: 10" ng-if="feedSongs.length>0">
 							    			<iframe src="{{makeUrl(song.songId)}}" width="250" height="100" frameborder="0" ></iframe>
 							    		</li>
 									 </ul>
 								</tab>
-								<tab heading="Friends Feed">
+								<tab heading="Friends Feed" ng-click="currentTab= 'friendsFeed'; updateFeed(selectedCategory)">
+									<ul style="list-style: none" class="no-overflow">
+							    		<li ng-repeat="song in feedSongs | limitTo: 15" ng-if="feedSongs.length>0">
+							    			<iframe src="{{makeUrl(song.songId)}}" width="250" height="100" frameborder="0" ></iframe>
+							    		</li>
+									 </ul>
 								</tab>
 							</tabset>
 					<div class = "interactive_feed">

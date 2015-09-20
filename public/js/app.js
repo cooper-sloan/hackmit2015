@@ -4,10 +4,14 @@ var app= angular.module("hackApp",['ui.bootstrap']);
 app.controller("mainCtrl",['$scope', '$http','$sce', function($scope, $http,$sce){
 	$scope.userId="94g6NNsxZM";
 	//Begin navBar code
+	
 	$scope.notifications=[];
 	$scope.getNotifications= function(){
 		$http.post("/getNotifications",{userId: "qs2dsZJNPJ"}).then(function(response){
-			$scope.notifications= response.data;
+			var songIds= response.data;
+			$http.post("/getTrackInfo",{trackIds: songIds}).then(function(response){
+				$scope.notifications= response.data.body.tracks;
+			})
 		})
 	}
 	$scope.getNotifications();
@@ -42,9 +46,13 @@ app.controller("mainCtrl",['$scope', '$http','$sce', function($scope, $http,$sce
 	//end category code
 	$scope.feedSongs=[];
 
+	$scope.currentTab="globalFeed";
+
 	$scope.updateFeed= function(category){
-		$http.post("/updateFeed",{genre: category}).then(function(response){
-			console.log(response);
+		
+
+		$http.post("/updateFeed",{genre: category, tabState: $scope.currentTab, userId: $scope.userId}).then(function(response){
+			
 			$scope.feedSongs=response.data;
 			//take list of song objects and add to feed songs
 		})
@@ -62,6 +70,8 @@ app.controller("mainCtrl",['$scope', '$http','$sce', function($scope, $http,$sce
                  $scope.updateFeed(newValue)
               }
              );
+
+	
 	//end feed 
 	$scope.currentSongId="6nmz4imkDcmtwMjocAzFSx"; //drake's hotline bling is default
 	$scope.currentSongUrl= $scope.makeUrl($scope.currentSongId);

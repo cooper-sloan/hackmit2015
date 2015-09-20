@@ -147,5 +147,10 @@ button {
 .container-fluid {
 	background-color: #F7F7F7;
 }
+.no-overflow{
+
+    height: 600px;
+    overflow: scroll;
+}
 
 
