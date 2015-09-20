@@ -45,9 +45,9 @@
 					        Categories <span class="caret"></span>
 					      </button>
 					      <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
-					        <li ng-repeat="category in categories">
-					        	{{category}}
-					        </li>
+					        
+					        	<button ng-repeat="category in categories" ng-click="updateCategory(category)">{{category}}</button>
+					        
 					      </ul>
 					    </div>
 						<button type="button" class="btn btn-default btn-lg ">
@@ -72,8 +72,8 @@
 							<tabset >
 							    <tab heading="Global Feed">
 							    	<ul>
-							    		<li ng-repeat="song in feedSongs" ng-if="feedSongs.length>0">
-							    			<iframe src="{{makeUrl(song.songID)}}" width="250" height="100" frameborder="0" allowtransparency="true"></iframe>
+							    		<li ng-repeat="song in feedSongs | limitTo: 5" ng-if="feedSongs.length>0">
+							    			<iframe src="{{makeUrl(song.songId)}}" width="250" height="100" frameborder="0" allowtransparency="true"></iframe>
 							    		</li>
 							    	</ul>
 							    </tab>

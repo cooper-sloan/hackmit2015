@@ -210,8 +210,11 @@ exports.getGenres = function(){
 	return promise
 }
 
+<<<<<<< HEAD
 exports.getFriends('qs2dsZJNPJ').then(function(r){console.log(r)},function(err){console.log(err)})
 //exports.getGenres().then(function(r){console.log(r)},function(err){console.log(err)})
+=======
+>>>>>>> 3385cc56804ace97c6aa76178a4e2af90976b1b2
 //exports.createUser('rockandroll','password','rocker@mail.com')
 //exports.getShares('qs2dsZJNPJ').then(function(r){console.log(r)},function(err){console.log(err)})
 //exports.getSongs('rap').then(function(r){console.log(r)},function(err){console.log(err)})

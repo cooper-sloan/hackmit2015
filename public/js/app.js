@@ -44,6 +44,13 @@ app.controller("mainCtrl",['$scope', '$http','$sce', function($scope, $http,$sce
 	}
 
 	$scope.updateFeed("rap");
+	
+	$scope.$watch("selectedCategory",
+              function(newValue, oldValue) {
+              	console.log('updating feed with: '+newValue);
+                 $scope.updateFeed(newValue)
+              }
+             );
 	//end feed 
 
 	//begin like and share control code
