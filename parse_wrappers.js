@@ -103,6 +103,25 @@ exports.saveShare =function(senderId, recieverId, songId){
 	return promise
 }
 
+//Returns a list of songId for the user
+exports.getShares = function(userId){
+	var promise = new Parse.Promise()
+	var ids=[]
+	var shareQuery = new Parse.Query("Shares")
+	var likeQuery = new Parse.Query("Likes")
+	likeQuery.equalTo("userId",userId)
+	shareQuery.equalTo("recieverId",userId)
+	shareQuery.doesNotMatchKeyInQuery("songId","songId",likeQuery)
+	shareQuery.each(function(element){
+		ids.push(element.attributes.songId)
+	}).then(function(results){
+		promise.resolve(ids)
+	},function(err){
+		promise.reject(err)
+	})
+	return promise
+}
+
 exports.getFriends = function(userId){
 	var promise = new Parse.Promise()
 	var friendIds = []
@@ -126,12 +145,54 @@ exports.getFriends = function(userId){
 	return promise;
 }
 
-/*
+exports.saveSong = function(song){
+	var promise = new Parse.Promise()
+	var songObject = new Parse.Object("Songs")
+	songObject.set("songId", song.spotifyId)
+	songObject.set("artists", song.artists)
+	songObject.set("title",song.title)
+	songObject.set("previewUrl",song.previewUrl)
+	if(song.genre){
+		songObject.set("genre",song.genre)
+	}
+	songObject.save().then(function(results){
+		promise.resolve(results)
+	},function(err){
+		promise.reject(err)
+	})
+	return promise
+}
+
+exports.getSongs = function(genre){
+	var promise = new Parse.Promise()
+	var songs=[]
+	var query= new Parse.Query("Songs")
+	query.equalTo("genre",genre)
+	query.each(function(song){
+		var songObject = {}
+		songObject.title = song.get("title")
+		songObject.artists = song.get("artists")
+		songObject.songId = song.get("songId")
+		songObject.genre = genre
+		songObject.previewUrl = song.get("previewUrl")
+		songs.push(songObject)
+	}).then(function(){
+		promise.resolve(songs)
+	},function(err){
+		promise.reject(err)
+	})
+	return promise
+}
+
+//exports.createUser('rockandroll','password','rocker@mail.com')
+//exports.getShares('qs2dsZJNPJ').then(function(r){console.log(r)},function(err){console.log(err)})
+//exports.getSongs('rap').then(function(r){console.log(r)},function(err){console.log(err)})
 //exports.saveShare('94g6NNsxZM','qs2dsZJNPJ','swag').then(function(r){console.log(r)},function(err){console.log(err)})
+/*
 num=0
-SpotifyWrappers.getTracks("Medium").then(function(results){
+SpotifyWrappers.getTracks("Rap").then(function(results){
 	_.each(results,function(element){
-		exports.saveShare('94g6NNsxZM','qs2dsZJNPJ',element.spotifyId).then(function(r){console.log(r)},function(err){console.log(err)})
+		exports.saveSong('94g6NNsxZM','qs2dsZJNPJ',element.spotifyId).then(function(r){console.log(r)},function(err){console.log(err)})
 	})
 })
 */
