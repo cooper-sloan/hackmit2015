@@ -3,6 +3,9 @@ var _ = require('underscore');
 var Parse = require('./parse_init').createParse();
 var SpotifyWebApi = require('spotify-web-api-node');
 
+// credentials are optional
+var spotifyApi = new SpotifyWebApi();
+
 // Search tracks whose name, album or artist contains 'Love'
 function getTracks(title){
 	var promise = new Parse.Promise()
@@ -17,6 +20,7 @@ function getTracks(title){
 			})
 			trackObject.spotifyId= track.id
 			trackObject.title = track.name
+			trackObject.previewUrl=track.preview_url
 			trackList.push(trackObject)
 		})
 		promise.resolve(trackList)
@@ -24,6 +28,16 @@ function getTracks(title){
 	    promise.reject(err)
 	  });
 	  return promise
+}
+
+function getPreviewUrl(songId){
+	var promise = new Parse.Promise()
+	spotifyApi.getTrack(songId).then(function(results){
+		promise.resolve(results.body.preview_url)
+	},function(err){
+		promise.reject(err)
+	})
+	return promise
 }
 
 function getPlayer(sondId){
