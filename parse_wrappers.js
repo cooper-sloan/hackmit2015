@@ -53,6 +53,7 @@ exports.saveFriendship = function (userId1,userId2){
 * like is a boolean value, true or false
 */
 exports.saveLike =function (userId,songId,like){
+	console.log('backend started')
 	var promise= new Parse.Promise()
 	var query = new Parse.Query("User")
 	query.get(userId).then(function(user){
@@ -65,7 +66,7 @@ exports.saveLike =function (userId,songId,like){
 			promise.resolve(results)
 		})
 	},function(err){
-		proimse.reject(err)
+		promise.reject(err)
 	})
 	return promise
 }
