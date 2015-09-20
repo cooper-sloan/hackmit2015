@@ -264,7 +264,7 @@ exports.getFriendsLikes = function(userId){
 //exports.getFriends('94g6NNsxZM').then(function(r){console.log(r)},function(err){console.log(err)})
 //exports.getLikes('qs2dsZJNPJ').then(function(r){console.log(r.length)},function(err){console.log(err)})
 
-exports.getFriendsLikes('94g6NNsxZM').then(function(r){console.log(r)},function(err){console.log(err)})
+//exports.getFriendsLikes('94g6NNsxZM').then(function(r){console.log(r)},function(err){console.log(err)})
 //exports.getFriends('qs2dsZJNPJ').then(function(r){console.log(r)},function(err){console.log(err)})
 //exports.getGenres().then(function(r){console.log(r)},function(err){console.log(err)})
 //exports.createUser('rockandroll','password','rocker@mail.com')
