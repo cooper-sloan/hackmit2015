@@ -53,9 +53,8 @@ exports.saveFriendship = function (userId1,userId2){
 * like is a boolean value, true or false
 */
 exports.saveLike =function (userId,songId,like){
-	console.log('backend started')
 	var promise= new Parse.Promise()
-	var query = new Parse.Query("User")
+	var query = new Parse.Query("_User")
 	query.get(userId).then(function(user){
 		var likeObject= new Parse.Object("Likes")
 		likeObject.set("userId",userId)
@@ -114,7 +113,9 @@ exports.getShares = function(userId){
 	shareQuery.equalTo("recieverId",userId)
 	shareQuery.doesNotMatchKeyInQuery("songId","songId",likeQuery)
 	shareQuery.each(function(element){
-		ids.push(element.attributes.songId)
+		var songId=element.attributes.songId
+		//SpotifyWrappers.getSongInfo(songId).then(function(results))
+
 	}).then(function(results){
 		promise.resolve(ids)
 	},function(err){
@@ -287,7 +288,7 @@ exports.getFriendsLikes = function(userId){
 
 //exports.getFriends('94g6NNsxZM').then(function(r){console.log(r)},function(err){console.log(err)})
 //exports.getLikes('qs2dsZJNPJ').then(function(r){console.log(r.length)},function(err){console.log(err)})
-
+//exports.getSongsForUser('rap','94g6NNsxZM').then(function(r){console.log(r)},function(err){console.log(err)})
 //exports.getFriendsLikes('94g6NNsxZM').then(function(r){console.log(r)},function(err){console.log(err)})
 //exports.getFriends('qs2dsZJNPJ').then(function(r){console.log(r)},function(err){console.log(err)})
 //exports.getGenres().then(function(r){console.log(r)},function(err){console.log(err)})
@@ -295,6 +296,8 @@ exports.getFriendsLikes = function(userId){
 //exports.getShares('qs2dsZJNPJ').then(function(r){console.log(r)},function(err){console.log(err)})
 //exports.getSongs('rap').then(function(r){console.log(r)},function(err){console.log(err)})
 //exports.saveShare('94g6NNsxZM','qs2dsZJNPJ','swag').then(function(r){console.log(r)},function(err){console.log(err)})
+exports.saveLike('Fb91E6KV3G','qs2dsZJNPJ',true).then(function(r){console.log(r)},function(err){console.log(err)})
+
 /*
 num=0
 SpotifyWrappers.getTracks("Rap").then(function(results){
