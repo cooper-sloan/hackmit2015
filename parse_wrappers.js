@@ -247,7 +247,7 @@ exports.getFriendsLikes = function(userId){
 				console.log(promises)
 				//console.log(results)
 				friendsLikes.push(results)
-				promise.resolve(friendsLikesf)
+				promise.resolve(friendsLikes)
 			},function(err){
 				//console.log(err)
 				promise.reject(err)
