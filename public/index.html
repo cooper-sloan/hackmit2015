@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Check this out</title>
+		<link type = "text/css" rel = "stylesheet" href = "hackmitoutlinecss.css"/>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<script src="bower_components/angular/angular.min.js"></script>
+		<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+ 		<script src="js/app.js"></script>
+	</head>
+	<body ng-app= "hackApp">
+		<div class = "container-fluid" ng-controller="mainCtrl">
+			<div class="row">
+				<div class = "box">
+					<div class = "col-md-8">
+						<div class = "heading">
+							<h1>Check this out </h1>
+						</div>
+					</div>
+					<div class = "col-md-2">
+						<div class = "notification"
+							<button type="button" class="btn btn-default btn-lg " width = "100px" height = "100px">
+	  							<span class="glyphicon glyphicon-bullhorn purple" aria-hidden="true"></span>							
+							</button>
+						</div>
+					</div>
+					<div class = "col-md-2">
+						<div class = "navbar">
+							<div id = "sign_in">
+								<p> benjismum</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class = "col-md-2">
+					<div class = "sidebar">
+						<h4>More</h4>
+						<hr>
+						
+						<div class="btn-group" dropdown is-open="status.isopen">
+					      <button id="single-button" type="button" class="btn btn-primary" dropdown-toggle ng-disabled="disabled">
+					        Categories <span class="caret"></span>
+					      </button>
+					      <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
+					        <li ng-repeat="category in categories">
+					        	{{category}}
+					        </li>
+					      </ul>
+					    </div>
+						<button type="button" class="btn btn-default btn-lg ">
+  							<span class="glyphicon glyphicon-thumbs-up purple" aria-hidden="true"></span> 
+  							Songs I Like
+						</button>
+						<br>
+						<button type="button" class="btn btn-default btn-lg">
+  							<span class="glyphicon glyphicon-thumbs-down purple" aria-hidden="true"></span> Songs I Dislike
+						</button>
+						<button type="button" class="btn btn-default btn-lg">
+  							<span class="glyphicon glyphicon-time purple" aria-hidden="true"></span> Saved for Later
+						</button>
+						<button type="button" class="btn btn-default btn-lg">
+  							<span class="glyphicon glyphicon-backward purple" aria-hidden="true"></span> History
+						</button>
+					</div>
+				</div>
+				<div class = "col-md-7">
+
+					<div class = "feed">
+							<tabset >
+							    <tab heading="Global Feed">
+							    	<ul>
+							    		<li ng-repeat="song in feedSongs" ng-if="feedSongs.length>0">
+							    			<iframe src="{{makeUrl(song.songID)}}" width="250" height="100" frameborder="0" allowtransparency="true"></iframe>
+							    		</li>
+							    	</ul>
+							    </tab>
+							    <tab heading="Friends Feed">Vertical content 2</tab>
+							</tabset>
+					</div>
+				</div>
+
+				<div class = "col-md-3">
+					<div class = "current_song">
+						<div class = "api">
+							<h4> Current Song </h4>
+							<hr>
+							<iframe src="https://embed.spotify.com/?uri=spotify:track:4th1RQAelzqgY7wL53UGQt" width="250" height="330" frameborder="0" allowtransparency="true"></iframe>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,4 +1,3 @@
-
 exports.createParse = function () {
     //var masterKey = process.argv.length > 2 ? process.argv[2] : null;
     var masterKey = "KXLpzX2RnvLvJw5jYrWCcG6RyDbkmrMB1l3rAYVy"

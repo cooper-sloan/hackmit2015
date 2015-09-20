@@ -1,0 +1,30 @@
+{
+  "name": "hackmit2015",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cooper-sloan/hackmit2015.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cooper-sloan/hackmit2015/issues"
+  },
+  "homepage": "https://github.com/cooper-sloan/hackmit2015#readme",
+  "dependencies": {
+    "body-parser": "^1.14.0",
+    "cookie-parser": "^1.4.0",
+    "express": "^4.13.3",
+    "method-override": "^2.3.5",
+    "parse": "^1.6.3",
+    "querystring": "^0.2.0",
+    "request": "^2.62.0",
+    "spotify-web-api-node": "^2.1.0",
+    "underscore": "^1.8.3"
+  }
+}
