@@ -39,8 +39,8 @@ app.controller("mainCtrl",['$scope', '$http','$sce', function($scope, $http,$sce
 		})
 	}
 
-	$scope.makeUrl= function(songID){
-		return $sce.trustAsResourceUrl('https://embed.spotify.com/?uri=spotify:track:'+ songID)
+	$scope.makeUrl= function(songId){
+		return $sce.trustAsResourceUrl('https://embed.spotify.com/?uri=spotify:track:'+ songId)
 	}
 
 	$scope.updateFeed("rap");
