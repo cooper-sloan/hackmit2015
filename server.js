@@ -8,7 +8,7 @@
     var port= process.env.PORT || 8080;
     var spotifyWebApi= require("spotify-web-api-node")
     var echojs= require('echojs')
-    
+
     var parseDB= require('./parse_wrappers.js')
     // configuration =================
 
@@ -47,12 +47,20 @@
 
     app.get('/categories', function(req,res){
         //Parse code to get list of all possible categories
-        res.send(["rap","chill","party"]);
+        var cats= parseDB.getGenres();
+        cats.then(function(result){
+            console.log(result)
+            res.send(result)
+        });
+        
     });
     app.post('/updateFeed',function(req,res){
         var category= req.body.genre;
-        //Parse code to get list of song objects
-        res.send([{title: "Hotline Bling", artist:"Drake", songID:"6nmz4imkDcmtwMjocAzFSx", genre: category}])
+        var songList= parseDB.getSongs(category).then(function(result){
+            res.send(result)
+        })
+        
+        //res.send([{title: "Hotline Bling", artist:"Drake", songID:"6nmz4imkDcmtwMjocAzFSx", genre: category}])
     })
     // listen (start app with node server.js) ======================================
     app.listen(port);
