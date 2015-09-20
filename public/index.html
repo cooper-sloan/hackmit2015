@@ -41,9 +41,9 @@
 					        	Categories <span class="caret"></span>
 					      		</button>
 					      		<ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
-					        		<li ng-repeat="category in categories">
+					        		<button ng-repeat="category in categories" ng-click="updateCategory(category)">
 					        			{{category}}
-					        		</li>
+					        		</button>
 					      		</ul>
 					    	</div>
 						</div>
