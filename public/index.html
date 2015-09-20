@@ -68,8 +68,8 @@
 							<tabset justified = "true">
 								<tab heading="Global Feed" style = "color: red" class = "global">
 									<ul>
-							    		<li ng-repeat="song in feedSongs" ng-if="feedSongs.length>0">
-							    			<iframe src="{{makeUrl(song.songID)}}" width="250" height="100" frameborder="0" allowtransparency="true"></iframe>
+							    		<li ng-repeat="song in feedSongs | limitTo: 2" ng-if="feedSongs.length>0">
+							    			<iframe src="{{makeUrl(song.songId)}}" width="250" height="100" frameborder="0" ></iframe>
 							    		</li>
 									 </ul>
 								</tab>

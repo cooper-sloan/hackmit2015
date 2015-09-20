@@ -92,7 +92,7 @@ exports.saveShare =function(senderId, recieverId, songId){
 					shareObject.set("reciever", reciever)
 					shareObject.set("songId",songId)
 					shareObject.save().then(function(){
-						promise.resolve(shareObject)
+					promise.resolve(shareObject)
 					})
 				})
 			})
@@ -133,19 +133,19 @@ exports.getFriends = function(userId){
 	mainQuery.include("user1")
 	mainQuery.include("user2")
 	//mainQuery.select('user1','user2')
-	mainQuery.find().then(function(results){
-		console.log(results)
-		_.each(results,function(element){
-			value=element.attributes.get("user1")
-			console.log(value)
-			if(value.id != userId){
-				friendObject = {}
-				friendObject.username = value.get("username")
-				friendObject.id = value.id
-				friends.push(friendObject)
-			}
-			
-		})
+	mainQuery.each(function(friendsObject){
+		if(friendsObject.get("userId1") == userId){
+			friendObject = {}
+			friendObject.username = friendsObject.get("user2").get("username")
+			friendObject.id = friendsObject.get("userId2")
+			friends.push(friendObject)
+		}else{
+			friendObject = {}
+			friendObject.username = friendsObject.get("user1").get("username")
+			friendObject.id = friendsObject.get("userId1")
+			friends.push(friendObject)
+		}
+	}).then(function(){
 		promise.resolve(friends)
 	},function(err){
 		promise.reject(err)
@@ -210,11 +210,8 @@ exports.getGenres = function(){
 	return promise
 }
 
-<<<<<<< HEAD
-exports.getFriends('qs2dsZJNPJ').then(function(r){console.log(r)},function(err){console.log(err)})
+//exports.getFriends('qs2dsZJNPJ').then(function(r){console.log(r)},function(err){console.log(err)})
 //exports.getGenres().then(function(r){console.log(r)},function(err){console.log(err)})
-=======
->>>>>>> 3385cc56804ace97c6aa76178a4e2af90976b1b2
 //exports.createUser('rockandroll','password','rocker@mail.com')
 //exports.getShares('qs2dsZJNPJ').then(function(r){console.log(r)},function(err){console.log(err)})
 //exports.getSongs('rap').then(function(r){console.log(r)},function(err){console.log(err)})
