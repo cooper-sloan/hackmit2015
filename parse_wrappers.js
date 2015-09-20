@@ -193,6 +193,30 @@ exports.getSongs = function(genre){
 	return promise
 }
 
+exports.getSongsForUser = function(genre,userId){
+	var promise = new Parse.Promise()
+	var songs=[]
+	var query= new Parse.Query("Songs")
+	query.equalTo("genre",genre)
+	var likeQuery=new Parse.Query("Likes")
+	likeQuery.equalTo("userId",userId)
+	query.doesNotMatchKeyInQuery("songId","songId",likeQuery)
+	query.each(function(song){
+		var songObject = {}
+		songObject.title = song.get("title")
+		songObject.artists = song.get("artists")
+		songObject.songId = song.get("songId")
+		songObject.genre = genre
+		songObject.previewUrl = song.get("previewUrl")
+		songs.push(songObject)
+	}).then(function(){
+		promise.resolve(songs)
+	},function(err){
+		promise.reject(err)
+	})
+	return promise
+}
+
 exports.getLikes = function(userId){
 	var promise = new Parse.Promise()
 	var query = new Parse.Query("Likes")
