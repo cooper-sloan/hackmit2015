@@ -1,3 +1,11 @@
+.red {
+	color: red;
+}
+
+.green {
+	color: green;
+}
+
 .glyphicon.glyphicon-bullhorn {
 	font-size: 40px;
 }
@@ -34,7 +42,7 @@ h4 {
 
 .current_song {
 	width: 100%;
-	height: 500px;
+	height: 700px;
 	background-color: white;
 	border-width: 1px;
 	border-color: #e9e9e9;
@@ -62,6 +70,9 @@ h4 {
     background-repeat:no-repeat; 
 }
 
+.thumbs_table {
+	width: 100%;
+}
 
 .button_table {
 	width: 100%;
@@ -83,7 +94,7 @@ button {
 
 .feed {
 	width: 100%;
-	height: 500px;
+	height: 700px;
 	background-color: white;
 	border-width: 1px;
 	border-color: #e9e9e9;
@@ -99,7 +110,7 @@ button {
 
 .sidebar {
 	width: 100%;
-	height: 500px;
+	height: 700px;
 	background-color: white;
 	border-width: 1px;
 	border-color: #e9e9e9;
