@@ -1,0 +1,20 @@
+{
+  "name": "hackmit2015",
+  "version": "1.0.0",
+  "homepage": "https://github.com/cooper-sloan/hackmit2015",
+  "authors": [
+    "dlazares <dlazares@mit.edu>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-bootstrap": "~0.13.4",
+    "bootstrap": "~3.3.5"
+  }
+}
