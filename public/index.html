@@ -35,6 +35,7 @@
 			<div class="row">
 				<div class = "col-md-2">
 					<div class = "sidebar">
+<<<<<<< HEAD
 						<div class = "category">
 							<div dropdown is-open="status.isopen">
 					      		<button id="single-button" type="button" class="btn btn-default" dropdown-toggle ng-disabled="disabled"><span class="glyphicon glyphicon-menu-hamburger purple" aria-hidden="true"></span> 
@@ -48,6 +49,22 @@
 					    	</div>
 						</div>
 						<button type="button" class="btn btn-default">
+=======
+						<h4>More</h4>
+						<hr>
+						
+						<div class="btn-group" dropdown is-open="status.isopen">
+					      <button id="single-button" type="button" class="btn btn-primary" dropdown-toggle ng-disabled="disabled">
+					        Categories <span class="caret"></span>
+					      </button>
+					      <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
+					        
+					        	<button ng-repeat="category in categories" ng-click="updateCategory(category)">{{category}}</button>
+					        
+					      </ul>
+					    </div>
+						<button type="button" class="btn btn-default btn-lg ">
+>>>>>>> 2ca2a40469f2c428551ea8ec24d103f3c81bf814
   							<span class="glyphicon glyphicon-thumbs-up purple" aria-hidden="true"></span> 
   							Songs I Like
 						</button>
@@ -65,11 +82,19 @@
 				</div>
 				<div class = "col-md-7">
 					<div class = "feed">
+<<<<<<< HEAD
 							<tabset justified = "true">
 								<tab heading="Global Feed" class = "global">
 									<ul>
 							    		<li ng-repeat="song in feedSongs" ng-if="feedSongs.length>0">
 							    			<iframe src="{{makeUrl(song.songID)}}" width="250" height="100" frameborder="0" allowtransparency="true"></iframe>
+=======
+							<tabset >
+							    <tab heading="Global Feed">
+							    	<ul>
+							    		<li ng-repeat="song in feedSongs | limitTo: 5" ng-if="feedSongs.length>0">
+							    			<iframe src="{{makeUrl(song.songId)}}" width="250" height="100" frameborder="0" allowtransparency="true"></iframe>
+>>>>>>> 2ca2a40469f2c428551ea8ec24d103f3c81bf814
 							    		</li>
 									 </ul>
 								</tab>

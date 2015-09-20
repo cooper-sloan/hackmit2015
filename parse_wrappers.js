@@ -124,21 +124,29 @@ exports.getShares = function(userId){
 
 exports.getFriends = function(userId){
 	var promise = new Parse.Promise()
-	var friendIds = []
+	var friends = []
 	var query1 = new Parse.Query("Friends")
-	query1.equalTo('user1',userId)
+	query1.equalTo('userId1',userId)
 	var query2 = new Parse.Query("Friends")
-	query2.equalTo('user2',userId)
+	query2.equalTo('userId2',userId)
 	var mainQuery = Parse.Query.or(query1,query2)
+	mainQuery.include("user1")
+	mainQuery.include("user2")
+	//mainQuery.select('user1','user2')
 	mainQuery.find().then(function(results){
+		console.log(results)
 		_.each(results,function(element){
-			_.each(element.attributes,function(value,key){
-				if(value != userId){
-					friendIds.push(value)
-				}
-			})
+			value=element.attributes.get("user1")
+			console.log(value)
+			if(value.id != userId){
+				friendObject = {}
+				friendObject.username = value.get("username")
+				friendObject.id = value.id
+				friends.push(friendObject)
+			}
+			
 		})
-		promise.resolve(friendIds)
+		promise.resolve(friends)
 	},function(err){
 		promise.reject(err)
 	})
@@ -202,8 +210,11 @@ exports.getGenres = function(){
 	return promise
 }
 
-
-exports.getGenres().then(function(r){console.log(r)},function(err){console.log(err)})
+<<<<<<< HEAD
+exports.getFriends('qs2dsZJNPJ').then(function(r){console.log(r)},function(err){console.log(err)})
+//exports.getGenres().then(function(r){console.log(r)},function(err){console.log(err)})
+=======
+>>>>>>> 3385cc56804ace97c6aa76178a4e2af90976b1b2
 //exports.createUser('rockandroll','password','rocker@mail.com')
 //exports.getShares('qs2dsZJNPJ').then(function(r){console.log(r)},function(err){console.log(err)})
 //exports.getSongs('rap').then(function(r){console.log(r)},function(err){console.log(err)})
