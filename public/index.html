@@ -19,16 +19,22 @@
 					</div>
 					<div class = "col-md-2">
 						<div class = "notification">
-	  							<span class="glyphicon glyphicon-bullhorn purple" aria-hidden="true"></span>						
-	  							<div dropdown >
-					      		<button id="single-button" type="button" class="btn btn-default" dropdown-toggle ng-disabled="disabled"> {{notifications.length}} notifications
-					      		</button>
-					      		<ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
-					        		<button ng-repeat="notif in notifications" ng-click="updateSong(notif)">
-					        			{{notif}}
-					        		</button>
-					      		</ul>
-					    	</div>	
+	  							
+		  					<div class = "boxnot">						
+		  							<div dropdown >
+						      		<button id="single-button2" type="button" style = "border: 1px solid white; height: 50px; width: 75px" class="btn btn-default" dropdown-toggle ng-disabled="disabled"> <span class="glyphicon glyphicon-bullhorn purple" aria-hidden="true"></span>
+						      			<span style = "color: red; height: 10px; width: 10px; padding-bottom: 100px" class = "number">
+						      				<b>{{notifications.length}}</b>
+						      			</span>
+						      		</button>
+						      		<ul class="dropdown-menu" role="menu" aria-labelledby="single-button2">
+						        		<button ng-repeat="notif in notifications" ng-click="updateSong(notif)">
+						        			{{notif}}
+						        		</button>
+						      		</ul>
+						    		</div>	
+						    </div>
+
 						</div>
 					</div>
 					<div class = "col-md-2">
@@ -76,8 +82,8 @@
 					<div class = "feed">
 							<tabset justified = "true">
 								<tab heading="Global Feed" style = "color: red" class = "global">
-									<ul>
-							    		<li ng-repeat="song in feedSongs | limitTo: 2" ng-if="feedSongs.length>0">
+									<ul style="list-style: none">
+							    		<li ng-repeat="song in feedSongs | limitTo: 15" ng-if="feedSongs.length>0">
 							    			<iframe src="{{makeUrl(song.songId)}}" width="250" height="100" frameborder="0" ></iframe>
 							    		</li>
 									 </ul>
