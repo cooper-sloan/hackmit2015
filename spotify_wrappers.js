@@ -7,7 +7,7 @@ var SpotifyWebApi = require('spotify-web-api-node');
 var spotifyApi = new SpotifyWebApi();
 
 // Search tracks whose name, album or artist contains 'Love'
-function getTracks(title){
+exports.getTracks = function(title){
 	var promise = new Parse.Promise()
 	spotifyApi.searchTracks(title)
 	  .then(function(data) {
@@ -30,7 +30,7 @@ function getTracks(title){
 	  return promise
 }
 
-function getPreviewUrl(songId){
+exports.getPreviewUrl = function(songId){
 	var promise = new Parse.Promise()
 	spotifyApi.getTrack(songId).then(function(results){
 		promise.resolve(results.body.preview_url)
@@ -38,8 +38,4 @@ function getPreviewUrl(songId){
 		promise.reject(err)
 	})
 	return promise
-}
-
-function getPlayer(sondId){
-	return "<iframe src=\"https://embed.spotify.com/?uri="+songId+"\" width=\"300\" height=\"380\" frameborder=\"0\" allowtransparency=\"true\"></iframe>"
 }
